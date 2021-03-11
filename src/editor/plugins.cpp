@@ -1,6 +1,7 @@
 #define LUMIX_NO_CUSTOM_CRT
 #include "editor/studio_app.h"
 #include "editor/world_editor.h"
+#include "engine/allocator.h"
 
 #include "imgui/imgui.h"
 
