@@ -2,19 +2,19 @@
 #include "engine/engine.h"
 #include "engine/plugin.h"
 #include "engine/stream.h"
-#include "engine/universe.h"
+#include "engine/world.h"
 #include "imgui/imgui.h"
 
 
 using namespace Lumix;
 
 
-// each universe has its own instance of this scene
+// each world has its own instance of this scene
 struct PluginScene : IScene {
-	PluginScene(Engine& engine, IPlugin& plugin, Universe& universe, IAllocator& allocator)
+	PluginScene(Engine& engine, IPlugin& plugin, World& world, IAllocator& allocator)
 		: m_engine(engine)
 		, m_plugin(plugin)
-		, m_universe(universe)
+		, m_world(world)
 		, m_allocator(allocator)
 	{}
 
@@ -29,7 +29,7 @@ struct PluginScene : IScene {
 
 	}
 	IPlugin& getPlugin() const override { return m_plugin; }
-	Universe& getUniverse() override { return m_universe; }
+	World& getWorld() override { return m_world; }
 	
 	void update(float time_delta, bool paused) {
 		// called each frame
@@ -42,7 +42,7 @@ struct PluginScene : IScene {
 
 	Engine& m_engine;
 	IPlugin& m_plugin;
-	Universe& m_universe;
+	World& m_world;
 	IAllocator& m_allocator;
 	float m_some_value = 0;
 };
@@ -58,12 +58,12 @@ struct PluginSystem : IPlugin {
 	void serialize(OutputMemoryStream& serializer) const override {}
 	bool deserialize(u32 version, InputMemoryStream& serializer) override { return true; }
 
-	void createScenes(Universe& universe) override {
-		// this is when a universe is created
-		// usually we want to add our scene to universe here
+	void createScenes(World& world) override {
+		// this is when a world is created
+		// usually we want to add our scene to world here
 		IAllocator& allocator = m_engine.getAllocator();
-		UniquePtr<PluginScene> scene = UniquePtr<PluginScene>::create(allocator, m_engine, *this, universe, allocator);
-		universe.addScene(scene.move());
+		UniquePtr<PluginScene> scene = UniquePtr<PluginScene>::create(allocator, m_engine, *this, world, allocator);
+		world.addScene(scene.move());
 	}
 
 	Engine& m_engine;
