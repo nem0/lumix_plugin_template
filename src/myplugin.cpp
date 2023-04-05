@@ -31,9 +31,9 @@ struct PluginScene : IScene {
 	IPlugin& getPlugin() const override { return m_plugin; }
 	World& getWorld() override { return m_world; }
 	
-	void update(float time_delta, bool paused) {
+	void update(float time_delta) {
 		// called each frame
-		if (!paused) m_some_value += time_delta; 
+		m_some_value += time_delta; 
 	}
 	
 	void clear() override {
