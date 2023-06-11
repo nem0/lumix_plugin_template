@@ -18,6 +18,8 @@ struct MyModule : IModule {
 		, m_allocator(allocator)
 	{}
 
+	const char* getName() const override { return "myplugin"; }
+
 	void serialize(struct OutputMemoryStream& serializer) override {
 		// save our module data
 		serializer.write(m_some_value);
