@@ -11,7 +11,7 @@ using namespace Lumix;
 struct EditorPlugin : StudioApp::GUIPlugin {
 	EditorPlugin(StudioApp& app) : m_app(app) {}
 
-	void onWindowGUI() override {
+	void onGUI() override {
 		ImGui::SetNextWindowSize(ImVec2(200, 200), ImGuiCond_FirstUseEver);
 		if (ImGui::Begin("My plugin")) {
 			ImGui::TextUnformatted("Hello world");
