@@ -1,7 +1,7 @@
 #define LUMIX_NO_CUSTOM_CRT
+#include "core/stream.h"
 #include "engine/engine.h"
 #include "engine/plugin.h"
-#include "engine/stream.h"
 #include "engine/world.h"
 #include "imgui/imgui.h"
 
