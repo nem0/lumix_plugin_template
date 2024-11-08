@@ -8,7 +8,6 @@ project "myplugin"
 	}
 	defines { "BUILDING_MYPLUGIN" }
 	links { "engine" }
-	useLua()
 	defaultConfigurations()
 
 linkPlugin("myplugin")
